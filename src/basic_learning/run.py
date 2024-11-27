@@ -43,10 +43,11 @@ def clean_data(df, min_price, max_price):
     df = df[idx].copy()
     # Convert last_review to datetime
     df['last_review'] = pd.to_datetime(df['last_review'])
+    #df.drop(columns=["Unnamed: 0"], inplace=True)
     return df
 
 def save_file(df, run, args):
-    df.to_csv("cleaned_data.csv")
+    df.to_csv("cleaned_data.csv", index=False)
     artifact = wandb.Artifact(
         args.output_artifact, type=args.output_type, description=args.output_description
     )
